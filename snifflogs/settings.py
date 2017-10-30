@@ -110,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/London'
 
 USE_I18N = True
 
@@ -124,7 +124,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'logs' , 'static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR,'snifflogs/static'),)
+
+from django.core.urlresolvers import reverse_lazy
+LOGIN_URL = reverse_lazy('index')
+
 
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True

@@ -1,5 +1,29 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+
+{% block style %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/index.css' %}" />
+{% endblock %}
 
 {% block content %}
-<h1>hi</h1>
+
+<div class="login-page">
+    <div class="form">
+      <form class="register-form" action="" name="signup" method="post"> {% csrf_token %}
+        {{ signup }}
+        <button type="submit" name="signup">Register</button>
+        <p class="message">Already registered? <a href="#">Sign In</a></p>
+      </form>
+      <form class="login-form" action="" name="login" method="post"> {% csrf_token %}
+        {{ login }}
+        <button type="submit" name="login">Login</button>
+        <p class="message">Not registered? <a href="#">Create an account</a></p>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block javascript %}
+<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 {% endblock %}
