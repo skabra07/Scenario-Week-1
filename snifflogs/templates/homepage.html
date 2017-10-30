@@ -8,13 +8,17 @@
 {% block content %}
 <div class="nav">
     <ul>
+        <li><h3>Ask Sniff Logs</h3></li>
         <li style="float:right"><a href="{% url 'logout' %}"<i class="material-icons">power_settings_new</i></a></li>
     </ul>
 </div>
 <div class="table">
-    <h3>Ask Sniff Logs</h3>
+    
     <div id="users">
-        <input class="search" style="float: right;clear: both;width:40%;height:30px" placeholder="Search by description or username" />
+        <div class="sea">
+            <i class="material-icons">search</i>
+            <input class="search" style="width:40%" placeholder="Search by description or username" />
+        </div>
         <table>
             <thead>
                 <tr>
@@ -27,7 +31,7 @@
             <tbody class="list">
                 {%for log in logs %}
                     <tr>
-                        <td>{{log.createdTime}}</td>
+                        <td class="date">{{log.createdTime}}</td>
                         <td class="name">{{log.username}}</td>
                         <td class="description">{{log.description}}</td>
                         <td><a id="edit{{log.id}}" style="cursor: pointer;color:rgb(0, 4, 255)"><i class="material-icons">mode_edit</i></a><a href="{% url 'delete' log.id %}" style="cursor: pointer;color:#db0000"><i class="material-icons">delete</i></a></td>
@@ -36,8 +40,7 @@
                         <!-- Modal content -->
                         <div class="modal-content">
                             <span class="close">&times;</span> 
-                            <br><br>   
-                            <h2>Log Details</h2>
+                            <h2>Edit Log Details</h2>
                             <form action="{% url 'edit' log.id %}" method="post">{% csrf_token %}
                                 <textarea id="log" name="log" rows="5" style="width:100%;">{{log.description}}</textarea>
                                 <br>
@@ -60,7 +63,7 @@
     <!-- Modal content -->
     <div class="modal-content">
         <span class="close">&times;</span> 
-        <br><br>   
+           
         <h2>Log Details</h2>
         <form action="{% url 'add' %}" method="post">{% csrf_token %}
             <textarea id="log" name="log" rows="5" style="width:100%;"></textarea>
@@ -80,7 +83,7 @@
 <script>
 
     var options = {
-        valueNames: [ 'name', 'description' ]
+        valueNames: [ 'name', 'description','date' ]
         };
         
         var userList = new List('users', options);

@@ -23,35 +23,34 @@ def index(request):
                 password = login.cleaned_data['password']
             else:
                 login = LoginForm()                
-                return render(request,'index.html',{"login":login,"signup":signup})
+                return render(request,'index.html',{"login":login,"signup":signup,"error":"Incorrect Username"})
 
             login = LoginForm() 
             try:
                 checkUser = User.objects.get(username=username)
             except User.DoesNotExist:
-                return render(request,'index.html',{"login":login,"signup":signup})
+                return render(request,'index.html',{"login":login,"signup":signup,"error":"Incorrect Username"})
 
             user = authenticate(username=username, password=password)
             if user is not None:
                 auth_login(request, user)
                 return redirect('homepage')
             else:
-                return render(request,'index.html',{"login":login,"signup":signup})
+                return render(request,'index.html',{"login":login,"signup":signup,"error":"Incorrect Password"})
 
         elif 'signup' in request.POST:
             login = LoginForm()
             signup = SignUpForm(request.POST)
             if signup.is_valid():
-                 username = signup.cleaned_data['username']
-                 password = signup.cleaned_data['password']
-                 fname = signup.cleaned_data['fname']
-                 lname = signup.cleaned_data['lname']
+                username = signup.cleaned_data['username']
+                password = signup.cleaned_data['password']
+                fname = signup.cleaned_data['fname']
+                lname = signup.cleaned_data['lname']
             else:
                 signup = SignUpForm()                
-                return render(request,'index.html',{"login":login,"signup":signup})
+                return render(request,'index.html',{"login":login,"signup":signup,"error":"Username Already exists"})
             
             try:
-                print("in signup")
                 user = User.objects.create_user(username = username,password = password,first_name = fname,last_name = lname)
                 user.save()
                 user = authenticate(username=username, password=password)
@@ -59,9 +58,8 @@ def index(request):
                     auth_login(request,user)
                     return redirect('homepage')
             except Exception:
-                print("error")
                 signup = SignUpForm()                
-                return render(request,'index.html',{"login":login,"signup":signup})
+                return render(request,'index.html',{"login":login,"signup":signup,"error":"Username Already exists"})
     else:
         login = LoginForm()
         signup = SignUpForm()

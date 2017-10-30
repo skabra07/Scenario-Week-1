@@ -12,12 +12,11 @@ body {
 }
 
 table {
-  border-collapse: strict;
+  border-collapse: collapse;
   background:#fff;
   display:table;
   table-layout: fixed;
   width: 100%;
-  white-space: nowrap;
 }
 .nav{
   margin-left: auto;
@@ -59,14 +58,6 @@ thead th {
   padding:20px;
   background:#a0d6b4;
   border-top:1px solid #858d99;
-  
-  &:first-child {
-   @include border-top-left-radius(5px); 
-  }
-
-  &:last-child {
-    @include border-top-right-radius(5px); 
-  }
 }
 
 tbody tr td {
@@ -76,9 +67,7 @@ tbody tr td {
   font-size:13px;
   padding:20px 20px 20px 20px;
   border-bottom:1px solid #e0e0e0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-wrap:break-word; 
 
   
 }
@@ -159,6 +148,28 @@ tbody tr:last-child td {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+.sea {
+  position: relative;
+  color: #aaa;
+  font-size: 16px;
+}
+
+.sea input {
+  width: 40%;
+  height: 32px;
+  text-indent: 32px;
+  background: #fcfcfc;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+}
+
+.sea .material-icons { 
+  position: absolute;
+  top: 6px;
+  left: 10px;
 }
 
 

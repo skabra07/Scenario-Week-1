@@ -9,6 +9,7 @@
 
 <div class="login-page">
     <div class="form">
+      <p style="color:#ff0000">{{error}}</p>
       <form class="register-form" action="" name="signup" method="post"> {% csrf_token %}
         {{ signup }}
         <button type="submit" name="signup">Register</button>
