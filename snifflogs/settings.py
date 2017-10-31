@@ -134,3 +134,5 @@ LOGIN_URL = reverse_lazy('index')
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 10 * 60 # max 10 min inactivity
 SESSION_SAVE_EVERY_REQUEST = True
+
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'

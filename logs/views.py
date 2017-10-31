@@ -63,7 +63,7 @@ def index(request):
     else:
         login = LoginForm()
         signup = SignUpForm()
-        return render(request,'index.html',{"login":login,"signup":signup})
+        return render(request,'index.html',{"login":login,"signup":signup,"title":"Index",})
 
 @login_required 
 def homepage(request):    
