@@ -19,7 +19,7 @@ class ViewTest(TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code,200)
 
-    def test_homepage_and_logout(self):
+    def test_login_and_logout(self):
         response = self.client.get('/homepage/')
         self.assertRedirects(response, '/?next=/homepage/')
         self.client.force_login(self.u1)
