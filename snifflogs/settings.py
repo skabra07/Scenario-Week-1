@@ -78,9 +78,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'snifflogs',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'USER': 'snifflogs@snifflog',
+        'PASSWORD': 'Asksniff@team8',
+        'HOST': 'snifflog.mysql.database.azure.com',
         'PORT': '3306'
     }
 }
