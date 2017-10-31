@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block style %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="nav">
+    <ul>
+        <li><h3>Ask Sniff Logs</h3></li>
+        <li style="float:right"><a href="{% url 'logout' %}"<i class="material-icons">power_settings_new</i></a></li>
+    </ul>
+</div>
+<div class="table">
+    
+    <div id="users">
+        <div class="sea">
+            <i class="material-icons">search</i>
+            <input class="search" style="width:40%" placeholder="Search by description or username" />
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="row-2 row-time">Time Stamp</th>
+                    <th class="row-3 row-user">Created By</th>
+                    <th class="row-4 row-log">Log Details</th>
+                    <th class="row-5 row-options">Options</th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                {%for log in logs %}
+                    <tr>
+                        <td class="date">{{log.createdTime}}</td>
+                        <td class="name">{{log.username}}</td>
+                        <td class="description">{{log.description}}</td>
+                        <td><a id="edit{{log.id}}" style="cursor: pointer;color:rgb(0, 4, 255)"><i class="material-icons">mode_edit</i></a><a href="{% url 'delete' log.id %}" style="cursor: pointer;color:#db0000"><i class="material-icons">delete</i></a></td>
+                    </tr>
+                    <div id="editModal{{log.id}}" class="modal">        
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span> 
+                            <h2>Edit Log Details</h2>
+                            <form action="{% url 'edit' log.id %}" method="post">{% csrf_token %}
+                                <textarea id="log" name="log" rows="5" style="width:100%;">{{log.description}}</textarea>
+                                <br>
+                                <button type="submit">Edit Log</button>
+                            </form>
+                        </div>        
+                    </div>
+                {% endfor %}
+                <tr>
+                    <td colspan="3"></td>
+                    <td id="add" style="cursor: pointer;"><i class="material-icons md-36">add_circle</i></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div id="addModal" class="modal">        
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span> 
+           
+        <h2>Log Details</h2>
+        <form action="{% url 'add' %}" method="post">{% csrf_token %}
+            <textarea id="log" name="log" rows="5" style="width:100%;"></textarea>
+            <br>
+            <button type="submit">Add Log</button>
+        </form>
+    </div>        
+</div>
+
+
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="{% static 'js/homepage.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/list.js' %}"></script>
+<script>
+
+    var options = {
+        valueNames: [ 'name', 'description','date' ]
+        };
+        
+        var userList = new List('users', options);
+
+    {% for log in logs %}
+        var edit{{log.id}} = document.getElementById('editModal{{log.id}}');
+        var editbtn{{log.id}} = document.getElementById("edit{{log.id}}");
+        var editspan{{ forloop.counter0 }} = document.getElementsByClassName("close")[{{ forloop.counter0 }}];
+        editbtn{{log.id}}.onclick = function() {
+            edit{{log.id}}.style.display = "block";
+        }
+        editspan{{ forloop.counter0 }}.onclick = function() {
+            edit{{log.id}}.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == edit{{log.id}}) {
+                edit{{log.id}}.style.display = "none";
+            }
+        }
+    {% endfor %}
+</script>
+{% endblock %}
