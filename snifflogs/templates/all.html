@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block style %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/all.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="nav">
+    <ul>
+        <li><a href="{% url 'homepage' %}"><h3>My Logs</h3></a></li>
+        <li><a href="{% url 'all' %}"><h3>All Logs</h3></a></li>
+        <li style="float:right"><a href="{% url 'logout' %}"<i class="material-icons md-36">power_settings_new</i></a></li>
+    </ul>
+</div>
+<h1 style="color:white">SniffLogs</h1>
+<h3 style="color:white">Below is everyones logs. To see your logs <a href="{% url 'homepage' %}">click here</a></h3>
+<div class="table">
+    
+    <div id="users">
+        <div class="sea">
+            <i class="material-icons">search</i>
+            <input class="search" style="width:40%" placeholder="Search by description or username" />
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="row-1 row-time">Time Stamp</th>
+                    <th class="row-2 row-user">Created By</th>
+                    <th class="row-3 row-log">Log Details</th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                {%for log in logs %}
+                    <tr>
+                        <td class="date">{{log.createdTime}}</td>
+                        <td class="name">{{log.username}}</td>
+                        <td class="description">{{log.description}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="{% static 'js/homepage.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/list.js' %}"></script>
+<script>
+    var options = {
+        valueNames: [ 'name', 'description','date' ]
+        };        
+    var userList = new List('users', options);    
+</script>
+{% endblock %}

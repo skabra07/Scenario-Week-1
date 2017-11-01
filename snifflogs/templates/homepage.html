@@ -8,10 +8,13 @@
 {% block content %}
 <div class="nav">
     <ul>
-        <li><h3>Ask Sniff Logs</h3></li>
-        <li style="float:right"><a href="{% url 'logout' %}"<i class="material-icons">power_settings_new</i></a></li>
+        <li><a href="{% url 'homepage' %}"><h3>My Logs</h3></a></li>
+        <li><a href="{% url 'all' %}"><h3>All Logs</h3></a></li>
+        <li style="float:right"><a href="{% url 'logout' %}"<i class="material-icons md-36">power_settings_new</i></a></li>
     </ul>
 </div>
+<h1 style="color:white">SniffLogs</h1>
+<h3 style="color:white">Below are all your logs. You can edit or delete your logs or add a new log. To see every ones log <a href="{% url 'all' %}">click here</a></h3>
 <div class="table">
     
     <div id="users">
@@ -22,17 +25,15 @@
         <table>
             <thead>
                 <tr>
-                    <th class="row-2 row-time">Time Stamp</th>
-                    <th class="row-3 row-user">Created By</th>
-                    <th class="row-4 row-log">Log Details</th>
-                    <th class="row-5 row-options">Options</th>
+                    <th class="row-1 row-time">Time Stamp</th>
+                    <th class="row-2 row-log">Log Details</th>
+                    <th class="row-3 row-options">Options</th>
                 </tr>
             </thead>
             <tbody class="list">
                 {%for log in logs %}
                     <tr>
                         <td class="date">{{log.createdTime}}</td>
-                        <td class="name">{{log.username}}</td>
                         <td class="description">{{log.description}}</td>
                         <td><a id="edit{{log.id}}" style="cursor: pointer;color:rgb(0, 4, 255)"><i class="material-icons">mode_edit</i></a><a href="{% url 'delete' log.id %}" style="cursor: pointer;color:#db0000"><i class="material-icons">delete</i></a></td>
                     </tr>
@@ -50,7 +51,7 @@
                     </div>
                 {% endfor %}
                 <tr>
-                    <td colspan="3"></td>
+                    <td colspan="2"></td>
                     <td id="add" style="cursor: pointer;"><i class="material-icons md-36">add_circle</i></td>
                 </tr>
             </tbody>

@@ -23,9 +23,11 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',views.index,name="index"),
     url(r'^homepage/$',views.homepage,name="homepage"),
+    url(r'^all/$',views.all,name="all"),
     url(r'^add/$',views.add,name="add"),
     url(r'^delete/(?P<id>[\d+]+)$',views.delete,name="delete"),
     url(r'^edit/(?P<id>[\d+]+)$',views.edit,name="edit"),
     url(r'^logout/$',views.logout,name="logout"),
+    url(r'^git/$',views.git,name="git"),
 
 ]
