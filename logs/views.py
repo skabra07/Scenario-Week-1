@@ -46,8 +46,8 @@ def index(request):
             if signup.is_valid():
                 username = signup.cleaned_data['username2']
                 password = signup.cleaned_data['password2']
-                fname = signup.cleaned_data['fname']
-                lname = signup.cleaned_data['lname']
+                fname = signup.cleaned_data['fname'].title()
+                lname = signup.cleaned_data['lname'].title()
             else:
                 signup = SignUpForm()
                 return render(request,'index.html',{"login":login,"signup":signup,"error":"Username Already exists"})
@@ -103,7 +103,7 @@ def all(request):
 def add(request):
     if request.method == "POST":
         user = request.user
-        logText = request.POST.get('log')
+        logText = request.POST.get('log').strip()
         print(request.POST)
         log = Log(description = logText,username=user)
         log.save()
@@ -120,7 +120,7 @@ def delete(request,id):
 def edit(request,id):
     if request.method == "POST" and request.POST.get('log') :
         log = Log.objects.get(id=id)
-        log.description = request.POST.get('log')
+        log.description = request.POST.get('log').strip()
         log.save()
     return redirect('homepage')
 
