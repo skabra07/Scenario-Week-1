@@ -85,6 +85,7 @@ pushd "%DEPLOYMENT_TARGET%"
 :: 3. Install packages
 echo Pip install requirements.
 env\Scripts\python.exe -m pip install --upgrade -r requirements.txt
+D:\home\Python354x64\python.exe -m pip install --upgrade -r requirements.txt
 IF !ERRORLEVEL! NEQ 0 goto error
 
 popd
