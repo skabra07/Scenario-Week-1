@@ -43,7 +43,7 @@
                             <span class="close">&times;</span> 
                             <h2>Edit Log Details</h2>
                             <form action="{% url 'edit' log.id %}" method="post">{% csrf_token %}
-                                <textarea id="log" name="log" rows="5" style="width:100%;">{{log.description}}</textarea>
+                                <textarea id="log" name="log" rows="5" style="width:100%;" required pattern="^\s*$">{{log.description}}</textarea>
                                 <br>
                                 <button type="submit">Edit Log</button>
                             </form>
@@ -67,7 +67,7 @@
            
         <h2>Log Details</h2>
         <form action="{% url 'add' %}" method="post">{% csrf_token %}
-            <textarea id="log" name="log" rows="5" style="width:100%;"></textarea>
+            <textarea id="log" name="log" rows="5" style="width:100%;" required></textarea>
             <br>
             <button type="submit">Add Log</button>
         </form>
