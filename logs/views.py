@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -68,7 +69,7 @@ def index(request):
 
 @login_required
 def homepage(request):
-    logsQuery = Log.objects.all()
+    logsQuery = Log.objects.filter(username=request.user.username)
     logs = []
     for log in logsQuery[::-1]:
         userObject = User.objects.get(username=log.username)
@@ -79,6 +80,22 @@ def homepage(request):
         res = {'username':username,'createdTime':createdTime,'description':description,'id':id}
         logs.append(res)
     return render(request,'homepage.html',{
+        'logs':logs,
+    })
+
+@login_required
+def all(request):
+    logsQuery = Log.objects.all()
+    logs = []
+    for log in logsQuery[::-1]:
+        userObject = User.objects.get(username=log.username)
+        username = userObject.get_full_name()
+        id = log.id
+        createdTime = log.createdTime
+        description = log.description
+        res = {'username':username,'createdTime':createdTime,'description':description,'id':id}
+        logs.append(res)
+    return render(request,'all.html',{
         'logs':logs,
     })
 
@@ -98,6 +115,7 @@ def delete(request,id):
     log.delete()
     return redirect('homepage')
 
+
 @login_required
 def edit(request,id):
     if request.method == "POST" and request.POST.get('log') :
@@ -111,7 +129,9 @@ def logout(request):
     auth_logout(request)
     return redirect('index')
 
+@csrf_exempt
 def git(request):
-    import subprocess
-    subprocess.run(['./git_pull.sh'])
-    return HttpResponse('')
+    if request.method == "POST":
+        import subprocess
+        subprocess.run(['./git_pull.sh'])
+        return HttpResponse('')

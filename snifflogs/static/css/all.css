@@ -75,15 +75,15 @@ tbody tr td {
 
 
 .row-time{
-  width: 25%;
+  width: 15%;
+}
+.row-username{
+  width: 15%;
 }
 .row-log{
-  width: 50%;
+  width: 70%;
 }
 
-.row-options{
-  width: 25%;
-}
 
 tbody tr:nth-child(2n) {
   background:#f0f3f5;
