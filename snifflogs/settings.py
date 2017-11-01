@@ -25,7 +25,7 @@ SECRET_KEY = 'atdmu&pr=9c6ifigj7=4^fiypsltj3t81jmb=l+qw3uq17t-5d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['snifflogs.azurewebsites.net']
+ALLOWED_HOSTS = []
 
 
 # Application definition
