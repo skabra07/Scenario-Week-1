@@ -21,7 +21,6 @@ try:
 except Exception:
     print('handling WSGI exception')
     # Error loading applications
-    if 'mod_wsgi' in sys.modules:
-        traceback.print_exc()
-        os.kill(os.getpid(), signal.SIGINT)
-        time.sleep(2.5)
+    traceback.print_exc()
+    os.kill(os.getpid(), signal.SIGINT)
+    time.sleep(2.5)
