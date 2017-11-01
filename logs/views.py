@@ -69,6 +69,10 @@ def index(request):
 
 @login_required
 def homepage(request):
+    error = ''
+    if request.session.has_key('error'):
+        error = request.session['error']
+        del request.session['error']    
     logsQuery = Log.objects.filter(username=request.user.username)
     logs = []
     for log in logsQuery[::-1]:
@@ -81,6 +85,7 @@ def homepage(request):
         logs.append(res)
     return render(request,'homepage.html',{
         'logs':logs,
+        'error':error,
     })
 
 @login_required
@@ -102,11 +107,14 @@ def all(request):
 @login_required
 def add(request):
     if request.method == "POST":
-        user = request.user
-        logText = request.POST.get('log').strip()
-        print(request.POST)
-        log = Log(description = logText,username=user)
-        log.save()
+        if request.POST.get('log').strip() != '':
+            user = request.user
+            logText = request.POST.get('log').strip()
+            print(request.POST)
+            log = Log(description = logText,username=user)
+            log.save()
+        else:
+             request.session['error'] = "Log Description cannot be empty"
     return redirect('homepage')
 
 @login_required
@@ -119,9 +127,12 @@ def delete(request,id):
 @login_required
 def edit(request,id):
     if request.method == "POST" and request.POST.get('log') :
-        log = Log.objects.get(id=id)
-        log.description = request.POST.get('log').strip()
-        log.save()
+        if request.POST.get('log').strip() != '':
+            log = Log.objects.get(id=id)
+            log.description = request.POST.get('log').strip()
+            log.save()
+        else:
+            request.session['error'] = "Log Description cannot be empty"
     return redirect('homepage')
 
 @login_required
