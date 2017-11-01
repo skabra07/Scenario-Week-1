@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .models import Log
 from .forms import LoginForm,SignUpForm
@@ -42,8 +43,8 @@ def index(request):
             login = LoginForm()
             signup = SignUpForm(request.POST)
             if signup.is_valid():
-                username = signup.cleaned_data['username']
-                password = signup.cleaned_data['password']
+                username = signup.cleaned_data['username2']
+                password = signup.cleaned_data['password2']
                 fname = signup.cleaned_data['fname']
                 lname = signup.cleaned_data['lname']
             else:
@@ -109,3 +110,8 @@ def edit(request,id):
 def logout(request):
     auth_logout(request)
     return redirect('index')
+
+def git(request):
+    import subprocess
+    subprocess.run(['./git_pull.sh'])
+    return HttpResponse('')

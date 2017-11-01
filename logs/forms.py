@@ -10,8 +10,8 @@ class LoginForm(forms.Form):
         self.fields['password'].widget.attrs.update({'required': 'required'})
 
 class SignUpForm(forms.Form):
-    username = forms.CharField(label='Username',max_length=100,widget=forms.TextInput(attrs={'id':'username'}))
-    password = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={'id':'password'}))
+    username = forms.CharField(label='Username',max_length=100,widget=forms.TextInput(attrs={'id':'username2'}))
+    password = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={'id':'password2'}))
     fname = forms.CharField(label='First Name',max_length=100,widget=forms.TextInput(attrs={'id':'fname'}))
     lname = forms.CharField(label='Last Name',max_length=100,widget=forms.TextInput(attrs={'id':'lname'}))
 
