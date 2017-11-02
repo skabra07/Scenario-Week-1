@@ -107,9 +107,9 @@ def all(request):
 @login_required
 def add(request):
     if request.method == "POST":
-        if request.POST.get('log').strip() != '':
+        if request.POST.get('addLog').strip() != '':
             user = request.user
-            logText = request.POST.get('log').strip()
+            logText = request.POST.get('addLog').strip()
             print(request.POST)
             log = Log(description = logText,username=user)
             log.save()
@@ -126,10 +126,10 @@ def delete(request,id):
 
 @login_required
 def edit(request,id):
-    if request.method == "POST" and request.POST.get('log') :
-        if request.POST.get('log').strip() != '':
+    if request.method == "POST" and request.POST.get('editLog') :
+        if request.POST.get('editLog').strip() != '':
             log = Log.objects.get(id=id)
-            log.description = request.POST.get('log').strip()
+            log.description = request.POST.get('editLog').strip()
             log.save()
         else:
             request.session['error'] = "Log Description cannot be empty"

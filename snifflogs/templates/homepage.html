@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block title %}
+SniffLogs - Logs
+{% endblock %}
+
 {% block style %}
 <link type="text/css" rel="stylesheet" href="{% static 'css/homepage.css' %}" />
 {% endblock %}
@@ -10,7 +14,7 @@
     <ul>
         <li><a href="{% url 'homepage' %}"><h3>My Logs</h3></a></li>
         <li><a href="{% url 'all' %}"><h3>All Logs</h3></a></li>
-        <li style="float:right"><a href="{% url 'logout' %}"<i class="material-icons md-36">power_settings_new</i></a></li>
+        <li style="float:right"><a href="{% url 'logout' %}" id="logout-button"><i class="material-icons md-36">power_settings_new</i></a></li>
     </ul>
 </div>
 <h1 style="color:white">SniffLogs</h1>
@@ -44,7 +48,7 @@
                             <span class="close">&times;</span> 
                             <h2>Edit Log Details</h2>
                             <form action="{% url 'edit' log.id %}" method="post">{% csrf_token %}
-                                <textarea id="log" name="log" rows="5" style="width:100%;" required pattern="^\s*$">{{log.description}}</textarea>
+                                <textarea id="editLog" name="editLog" rows="5" style="width:100%;">{{log.description}}</textarea>
                                 <br>
                                 <button type="submit">Edit Log</button>
                             </form>
@@ -68,7 +72,7 @@
            
         <h2>Log Details</h2>
         <form action="{% url 'add' %}" method="post">{% csrf_token %}
-            <textarea id="log" name="log" rows="5" style="width:100%;" required></textarea>
+            <textarea id="addLog" name="addLog" rows="5" style="width:100%;" required></textarea>
             <br>
             <button type="submit" id="log-button">Add Log</button>
         </form>
