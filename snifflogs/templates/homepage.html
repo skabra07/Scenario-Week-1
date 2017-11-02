@@ -74,7 +74,7 @@ SniffLogs - Logs
         <form action="{% url 'add' %}" method="post">{% csrf_token %}
             <textarea id="log" name="log" rows="5" style="width:100%;" required></textarea>
             <br>
-            <button type="submit">Add Log</button>
+            <button type="submit" id="log-button">Add Log</button>
         </form>
     </div>
 </div>
