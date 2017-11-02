@@ -1,8 +1,15 @@
 import django
 from django.test import TestCase
 from django.contrib.auth.models import User
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 
 # Create your tests here.
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.binary_location = 
 
 class ViewTest(TestCase):
 
@@ -13,6 +20,7 @@ class ViewTest(TestCase):
             super(ViewTest, cls).setUpClass()
             django.setup()
             cls.u1 = User.objects.create_user(username='testclient', password='password')
+            
 
     
     def test_index(self):
@@ -28,3 +36,6 @@ class ViewTest(TestCase):
         self.assertEqual(response.context['user'].username, 'testclient')
         response = self.client.get('/logout/')
         self.assertRedirects(response, '/')
+    
+    def test_login_selenium(self):
+

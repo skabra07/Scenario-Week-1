@@ -44,8 +44,8 @@ def index(request):
             login = LoginForm()
             signup = SignUpForm(request.POST)
             if signup.is_valid():
-                username = signup.cleaned_data['username2']
-                password = signup.cleaned_data['password2']
+                username = signup.cleaned_data['username']
+                password = signup.cleaned_data['password']
                 fname = signup.cleaned_data['fname'].title()
                 lname = signup.cleaned_data['lname'].title()
             else:
