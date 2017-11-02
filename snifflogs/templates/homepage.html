@@ -48,7 +48,7 @@ SniffLogs - Logs
                             <span class="close">&times;</span>
                             <h2>Edit Log Details</h2>
                             <form action="{% url 'edit' log.id %}" method="post">{% csrf_token %}
-                                <textarea id="log" name="log" rows="5" style="width:100%;" required>{{log.description}}</textarea>
+                                <textarea id="editLog" name="editLog" rows="5" style="width:100%;" required>{{log.description}}</textarea>
                                 <br>
                                 <button type="submit">Edit Log</button>
                             </form>
@@ -72,7 +72,7 @@ SniffLogs - Logs
 
         <h2>Log Details</h2>
         <form action="{% url 'add' %}" method="post">{% csrf_token %}
-            <textarea id="log" name="log" rows="5" style="width:100%;" required></textarea>
+            <textarea id="addLog" name="addLog" rows="5" style="width:100%;" required></textarea>
             <br>
             <button type="submit" id="log-button">Add Log</button>
         </form>
