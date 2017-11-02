@@ -20,6 +20,10 @@ class ViewTest(TestCase):
             django.setup()
             cls.u1 = User.objects.create_user(username='testclient', password='password')
 
+
+    def test_selenium(self):
+        driver = webdriver.Firefox()
+
         def inputSignup(firstname, secondname, username, password): # searches for sign up input elements and inserts values
             inputFirstname = driver.find_element_by_name("fname")
             inputFirstname.send_keys(firstname)
@@ -168,23 +172,20 @@ class ViewTest(TestCase):
             inputLogin("bobby135", "lamb786")
 
 
+        def test_index(self):
+            response = self.client.get('/')
+            self.assertEqual(response.status_code,200)
 
-    def test_index(self):
-        response = self.client.get('/')
-        self.assertEqual(response.status_code,200)
+        def test_login_and_logout(self):
+            response = self.client.get('/homepage/')
+            self.assertRedirects(response, '/?next=/homepage/')
+            self.client.force_login(self.u1)
+            response = self.client.get('/homepage/')
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.context['user'].username, 'testclient')
+            response = self.client.get('/logout/')
+            self.assertRedirects(response, '/')
 
-    def test_login_and_logout(self):
-        response = self.client.get('/homepage/')
-        self.assertRedirects(response, '/?next=/homepage/')
-        self.client.force_login(self.u1)
-        response = self.client.get('/homepage/')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['user'].username, 'testclient')
-        response = self.client.get('/logout/')
-        self.assertRedirects(response, '/')
-
-    def test_selenium(self):
-        driver = webdriver.Firefox()
         driver.get("http://snifflog.uksouth.cloudapp.azure.com")
         # driver.get("http://localhost:8000")
         currentstate = "login"
