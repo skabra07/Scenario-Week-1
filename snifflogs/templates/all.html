@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block title %}
+SniffLogs - All
+{% endblock %}
+
 {% block style %}
 <link type="text/css" rel="stylesheet" href="{% static 'css/all.css' %}" />
 {% endblock %}
@@ -10,13 +14,13 @@
     <ul>
         <li><a href="{% url 'homepage' %}"><h3>My Logs</h3></a></li>
         <li><a href="{% url 'all' %}"><h3>All Logs</h3></a></li>
-        <li style="float:right"><a href="{% url 'logout' %}"<i class="material-icons md-36">power_settings_new</i></a></li>
+        <li style="float:right"><a href="{% url 'logout' %}" id="logout-button"><i class="material-icons md-36">power_settings_new</i></a></li>
     </ul>
 </div>
 <h1 style="color:white">SniffLogs</h1>
 <h3 style="color:white">Below is everyones logs. To see your logs <a href="{% url 'homepage' %}">click here</a></h3>
 <div class="table">
-    
+
     <div id="users">
         <div class="sea">
             <i class="material-icons">search</i>
@@ -51,7 +55,7 @@
 <script>
     var options = {
         valueNames: [ 'name', 'description','date' ]
-        };        
-    var userList = new List('users', options);    
+        };
+    var userList = new List('users', options);
 </script>
 {% endblock %}

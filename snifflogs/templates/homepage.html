@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block title %}
+SniffLogs - Logs
+{% endblock %}
+
 {% block style %}
 <link type="text/css" rel="stylesheet" href="{% static 'css/homepage.css' %}" />
 {% endblock %}
@@ -10,7 +14,7 @@
     <ul>
         <li><a href="{% url 'homepage' %}"><h3>My Logs</h3></a></li>
         <li><a href="{% url 'all' %}"><h3>All Logs</h3></a></li>
-        <li style="float:right"><a href="{% url 'logout' %}"<i class="material-icons md-36">power_settings_new</i></a></li>
+        <li style="float:right"><a href="{% url 'logout' %}" id="logout-button"><i class="material-icons md-36">power_settings_new</i></a></li>
     </ul>
 </div>
 <h1 style="color:white">SniffLogs</h1>
