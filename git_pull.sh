@@ -5,5 +5,4 @@ cd /home/snifflogs/Scenario-Week-1/
 sudo git stash
 sudo git pull
 sudo git stash clear
-sudo python3 manage.py test
 sudo python3 manage.py runserver 0.0.0.0:8000
