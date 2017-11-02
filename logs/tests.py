@@ -19,10 +19,10 @@ class ViewTest(TestCase):
             super(ViewTest, cls).setUpClass()
             django.setup()
             cls.u1 = User.objects.create_user(username='testclient', password='password')
-
-      def test_index(self):
-            response = self.client.get('/')
-            self.assertEqual(response.status_code,200)
+    
+    def test_index(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code,200)
 
     def test_login_and_logout(self):
         response = self.client.get('/homepage/')
@@ -37,7 +37,6 @@ class ViewTest(TestCase):
 
     def test_selenium(self):
         driver = webdriver.Firefox()
-
         def inputSignup(firstname, secondname, username, password): # searches for sign up input elements and inserts values
             inputFirstname = driver.find_element_by_name("fname")
             inputFirstname.send_keys(firstname)
@@ -184,9 +183,7 @@ class ViewTest(TestCase):
 
         def correctLogIn():
             inputLogin("bobby135", "lamb786")
-
-
-    
+        
 
         driver.get("http://snifflog.uksouth.cloudapp.azure.com")
         # driver.get("http://localhost:8000")
