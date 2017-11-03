@@ -89,63 +89,21 @@
 
     var userList = new List('users', options);
 
-    { %
-        for log in logs %
+    {% for log in logs %}
+    var edit{{log.id}} = document.getElementById('editModal{{log.id}}');
+    var editbtn{{log.id}} = document.getElementById("edit{{log.id}}");
+    var editspan {{forloop.counter0}} = document.getElementsByClassName("close")[{{forloop.counter0}}];
+    editbtn{{log.id}}.onclick = function() {
+        edit{{log.id}}.style.display = "block";
     }
-    var edit {
-        {
-            log.id
-        }
-    } = document.getElementById('editModal{{log.id}}');
-    var editbtn {
-        {
-            log.id
-        }
-    } = document.getElementById("edit{{log.id}}");
-    var editspan {
-        {
-            forloop.counter0
-        }
-    } = document.getElementsByClassName("close")[{
-        {
-            forloop.counter0
-        }
-    }];
-    editbtn {
-        {
-            log.id
-        }
-    }.onclick = function() {
-        edit {
-            {
-                log.id
-            }
-        }.style.display = "block";
-    }
-    editspan {
-        {
-            forloop.counter0
-        }
-    }.onclick = function() {
-        edit {
-            {
-                log.id
-            }
-        }.style.display = "none";
+    editspan{{forloop.counter0}}.onclick = function() {
+        edit{{log.id}}.style.display = "none";
     }
     window.onclick = function(event) {
-        if (event.target == edit {
-                {
-                    log.id
-                }
-            }) {
-            edit {
-                {
-                    log.id
-                }
-            }.style.display = "none";
+        if (event.target == edit{{log.id}}) {
+            edit{{log.id}}.style.display = "none";
         }
-    } { % endfor %
     }
+    {% endfor %}
 </script>
 {% endblock %}
