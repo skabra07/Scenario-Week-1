@@ -110,7 +110,7 @@ def add(request):
         if request.POST.get('addLog').strip() != '':
             user = request.user
             logText = request.POST.get('addLog').strip()
-            print(request.POST)
+            # print(request.POST)
             log = Log(description = logText,username=user)
             log.save()
         else:
