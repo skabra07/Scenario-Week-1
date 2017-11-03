@@ -92,7 +92,7 @@
     {% for log in logs %}
     var edit{{log.id}} = document.getElementById('editModal{{log.id}}');
     var editbtn{{log.id}} = document.getElementById("edit{{log.id}}");
-    var editspan {{forloop.counter0}} = document.getElementsByClassName("close")[{{forloop.counter0}}];
+    var editspan{{forloop.counter0}} = document.getElementsByClassName("close")[{{forloop.counter0}}];
     editbtn{{log.id}}.onclick = function() {
         edit{{log.id}}.style.display = "block";
     }
